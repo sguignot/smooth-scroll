@@ -275,6 +275,8 @@
 			} while (anchor);
 		}
 		location = location - headerHeight - offset;
+		var maxLocation = getDocumentHeight() - window.innerHeight;
+		location = Math.min(maxLocation, location);
 		return location >= 0 ? location : 0;
 	};
 
@@ -404,6 +406,7 @@
 		var toggle = getClosest( event.target, settings.selector );
 		if ( toggle && toggle.tagName.toLowerCase() === 'a' ) {
 			event.preventDefault(); // Prevent default click event
+			toggle.blur(); // Remove focus from scroll element
 			smoothScroll.animateScroll( toggle, toggle.hash, settings); // Animate scroll
 		}
 	};
